@@ -53,6 +53,20 @@ async def positive_answer(message: Message):
     else:
         await message.answer("Пока мы играем, мы не можем начать новую. Нажми /cancel")
 
+@dp.message(F.text.lower().in_(['нет', 'не', 'не хочу', 'не буду']))
+async def process_negative_answer(message: Message):
+    if not user['in_game']:
+        await message.answer(
+            'Жаль :(\n\nЕсли захотите поиграть - просто '
+            'напишите об этом'
+        )
+    else:
+        await message.answer(
+            'Мы же сейчас с вами играем. Присылайте, '
+            'пожалуйста, числа от 1 до 100'
+        )
+
+
 @dp.message(lambda x: x.text and x.text.isdigit() and 1 <= int(x.text) <= 100)
 async def processing(message: Message):
     if user['in_game']:
