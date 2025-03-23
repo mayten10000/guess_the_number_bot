@@ -96,3 +96,7 @@ async def process_out(message: Message):
         await message.answer("Ты в игре")
     else:
         await message.answer("Напиши сыграем или го")
+
+
+if __name__ == '__main__':
+    dp.run_polling(bot)
